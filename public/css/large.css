@@ -1,0 +1,68 @@
+@media only screen and (min-width:750px){
+    body {
+        background-image: url("/images/site/small_check.jpg");
+        background-repeat: repeat;
+    }
+
+    #wrapper {
+        background-color: white;
+        margin: 1rem auto;
+        max-width: 88%;
+        padding: .5rem 0;
+        border-radius: 1rem;
+        border: solid 5px #000;
+    }
+
+    #home-cont h1 {
+        margin: 2rem 0;
+    }
+
+    #h-delorean aside{
+        width: 30%;
+        height: auto;
+        padding-left: 8%;
+    }
+
+    #top-header .siteName a,
+    #h-delorean aside h3 {
+        font-size: 2rem;
+    }
+
+    #h-delorean aside ul li,
+    #h-delorean aside a,
+    #home-cont article h2,
+    #h-delorean aside ul li,
+    #upgrades-grid h2 {
+        font-size: 1.5rem;
+    }
+    
+    #h-delorean aside ul {
+        padding-bottom: 2rem;
+    }
+
+    #h-delorean aside a {
+        padding: 1rem;
+    }
+
+    #h-delorean {
+        margin-bottom: 5rem;
+    }
+
+    #rev-upgr-grid {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 2rem;
+        justify-content: space-evenly;
+    }
+
+    #home-cont article,
+    #upgrades-grid {
+        width: 50%;
+    }
+
+    #home-cont article ul {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
