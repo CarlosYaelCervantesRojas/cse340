@@ -18,3 +18,5 @@ node_modules
 README.md
 
 pnpm-lock.yaml
+
+inventory-data.txt
