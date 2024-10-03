@@ -16,11 +16,12 @@
 }
 
 #top-header .siteName a,
-#home-cont h1,
+h1,
 #home-cont article h2,
 #upgrades-grid h2,
 #h-delorean aside h3,
-#upgrades-grid .upgrade a {
+#upgrades-grid .upgrade a,
+.namePrice h2 a {
   font-family: var(--heading-font);
 }
 
@@ -28,6 +29,7 @@
 #h-delorean aside ul li,
 #h-delorean aside a,
 #home-cont article ul,
+.namePrice span,
 .copyright {
   font-family: var(--paragraph-font);
   font-weight: 700;
@@ -35,7 +37,8 @@
 }
 
 #top-header a,
-#upgrades-grid .upgrade a {
+#upgrades-grid .upgrade a,
+.namePrice h2 a {
   text-decoration: none;
   color: var(--oxf-blue);
 }
@@ -90,7 +93,7 @@ nav a:hover {
   margin: .5rem;
 }
 
-#home-cont h1 {
+h1 {
   font-size: 1.5rem;
   font-weight: 100;
   text-align: center;
@@ -190,4 +193,28 @@ nav a:hover {
 /* Footer */
 .copyright {
   margin: 2rem .5rem;
+}
+
+
+/* Vehicles content */
+#inv-display {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+#inv-display li {
+  border-radius: 1rem;
+  box-shadow: 1px 5px 5px 3px var(--delft-blue);
+  margin: 2rem 7% 0 7%;
+  max-width: 85%;
+  padding: 1rem 0;
+}
+
+.namePrice hr {
+  border: 1px solid rgba(000, 000, 000, .6);
+}
+
+.namePrice h2 a{
+  font-size: 1.3rem;
 }
