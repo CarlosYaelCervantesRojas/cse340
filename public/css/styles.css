@@ -30,7 +30,8 @@ h1,
 #h-delorean aside a,
 #home-cont article ul,
 .namePrice span,
-.copyright {
+.copyright,
+#error-p {
   font-family: var(--paragraph-font);
   font-weight: 700;
   font-size: 1rem;
@@ -217,4 +218,9 @@ h1 {
 
 .namePrice h2 a{
   font-size: 1.3rem;
+}
+
+/* Error view */
+#error-p {
+  text-align: center;
 }
