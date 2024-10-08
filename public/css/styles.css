@@ -21,7 +21,8 @@ h1,
 #upgrades-grid h2,
 #h-delorean aside h3,
 #upgrades-grid .upgrade a,
-.namePrice h2 a {
+.namePrice h2 a,
+#item-cont h2 {
   font-family: var(--heading-font);
 }
 
@@ -31,7 +32,9 @@ h1,
 #home-cont article ul,
 .namePrice span,
 .copyright,
-#error-p {
+#error-p,
+#item-cont article p,
+#error-link {
   font-family: var(--paragraph-font);
   font-weight: 700;
   font-size: 1rem;
@@ -42,6 +45,18 @@ h1,
 .namePrice h2 a {
   text-decoration: none;
   color: var(--oxf-blue);
+}
+
+#home-cont article h2,
+#upgrades-grid h2 {
+  font-weight: 100;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  text-align: start;
+}
+
+#item-cont h2 {
+  font-weight: 100;
 }
 
 
@@ -70,7 +85,7 @@ nav ul {
 }
 
 nav li {
-  flex-grow: 5;
+  flex-grow: 1;
 }
 
 nav a {
@@ -151,14 +166,6 @@ h1 {
   height: auto;
 }
 
-#home-cont article h2,
-#upgrades-grid h2 {
-  font-weight: 100;
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  text-align: start;
-}
-
 #home-cont article ul {
   padding-left: 1rem;
 }
@@ -191,12 +198,6 @@ h1 {
 }
 
 
-/* Footer */
-.copyright {
-  margin: 2rem .5rem;
-}
-
-
 /* Vehicles content */
 #inv-display {
   list-style: none;
@@ -220,7 +221,41 @@ h1 {
   font-size: 1.3rem;
 }
 
+
+/* Item (single vehicle) view */
+#item-cont {
+  margin: 0 1rem;
+}
+
+#inv-display li a img,
+#item-cont picture img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+
+#item-cont article p {
+  font-size: 1.2rem;
+}
+
+#item-cont article p {
+  padding-left: .5rem;
+}
+
+#item-cont article p:nth-child(even) {
+  padding: .8rem .5rem;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+
 /* Error view */
 #error-p {
   text-align: center;
+}
+
+
+/* Footer */
+.copyright,
+#error-link {
+  margin: 2rem .5rem;
 }
