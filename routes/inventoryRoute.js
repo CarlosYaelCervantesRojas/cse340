@@ -17,7 +17,12 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByI
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassificationView))
 // Route to build add inventory view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventoryView))
-
+// Route to request inventory data
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+// Route to build edit inventory view
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildEditInventoryView))
+// Route to build delete confirmation view
+router.get("/delete/:inventory_id", utilities.handleErrors(invController.buildDeleteConfirmationView))
 
 // Route to process the new classification data
 router.post("/add-classification",
@@ -31,6 +36,17 @@ router.post("/add-inventory",
     vehicleValidation.checkVehicleData,
     utilities.handleErrors(invController.addVehicle)
 )
+
+// Route to process the update vehicle data
+router.post("/update/",
+    vehicleValidation.vehicleRules(),
+    vehicleValidation.checkVehicleUpdateData,
+    utilities.handleErrors(invController.updateVehicle))
+// Route to process the update vehicle data
+router.post("/delete/",
+    // vehicleValidation.vehicleRules(),
+    // vehicleValidation.checkVehicleUpdateData,
+    utilities.handleErrors(invController.deleteVehicle))
 
 
 module.exports = router;

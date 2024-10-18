@@ -1,0 +1,61 @@
+<% if (title) { %>
+    <h1><%- title %></h1>
+<% } else {
+    res.redirec("/")
+}%>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().filter(error => error. msg !== "Invalid value").forEach(error => { %>
+        <li>&#9888; <%= error.msg %></li>
+    <%}) %>
+    </ul>
+<% } %>
+
+<form action="/inv/update" method="post" class="login-form" id="updateForm">
+    <label for="inv-make">
+        Make:<input type="text" id="inv-make" name="inv_make" required minlength="3" placeholder="Min of 3 characters" value="<%- locals.inv_make %>">
+    </label>
+    <label for="inv-model">
+        Model:<input type="text" id="inv-model" name="inv_model" required minlength="2" placeholder="Min of 2 characters" value="<%- locals.inv_model %>">
+    </label>
+    <label for="inv-year">
+        Year:<input type="number" id="inv-year" name="inv_year" required min="1000" max="9999" step="1" placeholder="4-digit year" value="<%- locals.inv_year %>">
+    </label>
+    <label for="inv-description">
+        Description:<textarea name="inv_description" id="inv-description" required minlength="3" ><%- locals.inv_description %></textarea>
+    </label>
+    <label for="inv-image">
+        Image Path:<input type="text" name="inv_image" id="inv-image" value="/images/vehicles/no-image.png" readonly>
+    </label>
+    <label for="inv-thumbnail">
+        Thumbnail Path:<input type="text" name="inv_thumbnail" id="inv-thumbnail" value="/images/vehicles/no-image.png" readonly>
+    </label>
+    <label for="inv-price">
+        Price:<input type="number" name="inv_price" id="inv-price" required step="0.01" placeholder="Decimal or integer" value="<%- locals.inv_price %>">
+    </label>
+    <label for="inv-miles">
+        Miles:<input type="number" name="inv_miles" id="inv-miles" required step="1" placeholder="Digits only" value="<%- locals.inv_miles %>">
+    </label>
+    <label for="inv-color">
+        Color:<input type="text" name="inv_color" id="inv-color" required value="<%- locals.inv_color %>">
+    </label>
+    <label for="classification-id">
+        Classification:<%- classificationSelect %>
+    </label>
+
+    <p id="req-pass">&#9888; All fiels are required.</p>
+
+    <button type="submit" disabled>
+        Update Vehicle
+    </button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+
+</form>
+
+<script src="/js/inv-update.js"></script>

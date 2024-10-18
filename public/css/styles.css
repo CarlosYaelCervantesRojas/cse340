@@ -22,7 +22,8 @@ h1,
 #h-delorean aside h3,
 #upgrades-grid .upgrade a,
 .namePrice h2 a,
-#item-cont h2 {
+#item-cont h2,
+#manage-inv h2 {
   font-family: var(--heading-font);
 }
 
@@ -45,7 +46,11 @@ h1,
 #messages ul li,
 .notice li,
 .notice,
-#management-links a {
+#management-links a,
+#manage-inv p,
+#manage-inv select,
+#manage-inv option,
+#inventoryDisplay tbody tr td {
   font-family: var(--paragraph-font);
   font-weight: 700;
   font-size: 1rem;
@@ -53,7 +58,8 @@ h1,
 
 .login-form label,
 .login-form input,
-.login-form button {
+.login-form button,
+#inventoryDisplay thead tr th {
   font-family: var(--nav-font);
   font-weight: 500;
   font-size: 1.2rem;
@@ -67,7 +73,8 @@ h1,
 }
 
 #home-cont article h2,
-#upgrades-grid h2 {
+#upgrades-grid h2,
+#manage-inv h2 {
   font-weight: 100;
   margin-top: 1.5rem;
   font-size: 1.2rem;
@@ -294,7 +301,8 @@ h1 {
 .login-form input[type="number"],
 .login-form input[type="text"],
 .login-form select,
-.login-form textarea {
+.login-form textarea,
+#manage-inv select {
   display: block;
   width: 100%;
   height: 2.5rem;
@@ -351,6 +359,10 @@ input[type="text"]:focus:valid,
   background-color: var(--delft-blue);
 }
 
+.login-form button:disabled {
+  cursor: not-allowed;
+}
+
 #req-pass {
   text-align: start;
   color: var(--oxf-blue);
@@ -372,6 +384,22 @@ input[type="text"]:focus:valid,
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+#manage-inv {
+  padding: 1rem;
+}
+
+#inventoryDisplay {
+  padding-top: 1rem;
+}
+
+#inventoryDisplay td {
+  padding: .5rem;
+}
+
+#inventoryDisplay tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, .1);
 }
 
 /* Footer */

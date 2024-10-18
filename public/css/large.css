@@ -90,4 +90,8 @@
     #item-cont picture {
         margin-top: 1.2rem;
     }
+
+    #manage-inv select {
+        width: 50%;
+      }
 }
