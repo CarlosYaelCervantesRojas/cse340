@@ -187,6 +187,22 @@ async function updateAccount(req, res) {
         // so that payload contains the new updated data,
         // if not, the accountData variable stored in "locals" will only be updated
         // when the user logs out and logs in again.
+        res.clearCookie("jwt")
+        delete res.locals.accountData
+        delete res.locals.loggedin
+
+        const accountData = await accountModel.getAccountByEmail(account_email)
+        delete accountData.account_password 
+        const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+        if (process.env.NODE_ENV == "development") {
+            res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+        } else {
+            res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+        }
+
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+
         req.flash("notice", "Acounnt succesfully udpated.")
         res.status(201).render("account/management", {
             title: "Account Management",
