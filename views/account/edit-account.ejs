@@ -1,0 +1,54 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirec("/")
+}%>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li>&#9888; <%= error.msg %></li>
+    <%}) %>
+    </ul>
+<% } %>
+
+<form action="/account/update-account" method="post" class="login-form" id="edit-account">
+    <label for="first-name">
+        First name: <input type="text" name="account_firstname" id="first-name" required value="<%= locals.account_firstname %>">
+    </label>
+    <label for="last-name">
+        Last name: <input type="text" name="account_lastname" id="last-name" required value="<%= locals.account_lastname %>">
+    </label>
+    <label for="email">
+        Email: <input type="email" name="account_email" id="email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
+    </label>
+
+    <input type="hidden" name="account_id" value="<%= locals.account_id%>">
+   
+    <button id="account-button" type="submit" disabled>
+        Update account
+    </button>
+    
+</form>
+
+<h2 id="updade-password">Update password</h2>
+
+<form action="/account/update-password" method="post" class="login-form" id="edit-password">
+    <label for="password">
+        Password: <input type="password" name="account_password" id="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><img id="toggle-pass" src="/images/site/visibility.svg" alt="t-pass">
+    </label>
+
+    <p id="req-pass">&#9888; Note your original password will be changed.<br>Password must be minimun of 12 characters and include;<br> 1 capital letter, 1 number and 1 special character.</p>
+    
+    <button id="password-button" type="submit" disabled>
+        Update Password
+    </button>
+
+    <input type="hidden" name="account_id" value="<%= locals.account_id%>">
+    
+</form>
+
+<script src="/js/script.js"></script>
+<script src="/js/update-account.js"></script>

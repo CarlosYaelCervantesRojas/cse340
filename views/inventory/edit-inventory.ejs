@@ -28,10 +28,10 @@
         Description:<textarea name="inv_description" id="inv-description" required minlength="3" ><%- locals.inv_description %></textarea>
     </label>
     <label for="inv-image">
-        Image Path:<input type="text" name="inv_image" id="inv-image" value="/images/vehicles/no-image.png" readonly>
+        Image Path:<input type="text" name="inv_image" id="inv-image" value="<%- locals.inv_image %>" readonly>
     </label>
     <label for="inv-thumbnail">
-        Thumbnail Path:<input type="text" name="inv_thumbnail" id="inv-thumbnail" value="/images/vehicles/no-image.png" readonly>
+        Thumbnail Path:<input type="text" name="inv_thumbnail" id="inv-thumbnail" value="<%- locals.inv_thumbnail %>" readonly>
     </label>
     <label for="inv-price">
         Price:<input type="number" name="inv_price" id="inv-price" required step="0.01" placeholder="Decimal or integer" value="<%- locals.inv_price %>">

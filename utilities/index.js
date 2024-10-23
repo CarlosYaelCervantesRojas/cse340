@@ -149,4 +149,25 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
+/* ****************************************
+* Middleware to check account type
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+  if (req.cookies.jwt) {
+    const accountData = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET)
+    const accountTypes = ["Employee", "Admin"]
+    if (accountTypes.includes(accountData.account_type)) {
+      next()
+    } else {
+      req.flash("notice", "Please, check your credentials or log in.")
+      res.redirect("/account/login")
+    }
+  } else {
+    req.flash("notice", "Please log in.")
+    res.redirect("/account/login")
+  }
+
+
+}
+
 module.exports = Util

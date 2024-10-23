@@ -23,7 +23,10 @@ h1,
 #upgrades-grid .upgrade a,
 .namePrice h2 a,
 #item-cont h2,
-#manage-inv h2 {
+#manage-inv h2,
+#account-management h2,
+#account-management h3,
+#updade-password {
   font-family: var(--heading-font);
 }
 
@@ -50,7 +53,8 @@ h1,
 #manage-inv p,
 #manage-inv select,
 #manage-inv option,
-#inventoryDisplay tbody tr td {
+#inventoryDisplay tbody tr td,
+#account-management a {
   font-family: var(--paragraph-font);
   font-weight: 700;
   font-size: 1rem;
@@ -74,11 +78,19 @@ h1,
 
 #home-cont article h2,
 #upgrades-grid h2,
-#manage-inv h2 {
+#manage-inv h2,
+#account-management h2,
+#account-management h3,
+#updade-password {
   font-weight: 100;
   margin-top: 1.5rem;
   font-size: 1.2rem;
   text-align: start;
+}
+
+#account-management h2,
+#account-management h3 {
+  font-size: 1rem;
 }
 
 #item-cont h2 {
@@ -96,6 +108,10 @@ h1,
 
 #top-header .siteName a {
   font-size: 1.5rem;
+}
+
+#logout-form {
+  display: none;
 }
 
 
@@ -280,7 +296,8 @@ h1 {
 
 /* Error view */
 #error-p,
-.login-form p {
+.login-form p,
+#updade-password {
   text-align: center;
 }
 
@@ -386,11 +403,13 @@ input[type="text"]:focus:valid,
   gap: 1rem;
 }
 
-#manage-inv {
+#manage-inv,
+#account-management {
   padding: 1rem;
 }
 
-#inventoryDisplay {
+#inventoryDisplay,
+#updade-password {
   padding-top: 1rem;
 }
 
