@@ -24,5 +24,12 @@
     <% if (locals.accountData.account_type == "Employee" || locals.accountData.account_type == "Admin") { %>
         <h3>Inventory Management</h3>
         <p><a href="/inv/">Manage Inventory</a></p>
-        <% }%>
+    <% }%>
+
+    <h3>My Reviews</h3>
+    <% if (userReviews) { %>
+        <%- userReviews %>
+    <% } else { %>
+        <p class="no-reviews">You do not have any reviews yet.</p>
+    <% }%>
 </section>

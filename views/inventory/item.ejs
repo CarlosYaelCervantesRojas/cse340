@@ -4,9 +4,44 @@
 <% } else {
 res.redirect("/")
 } %>
-    
-<!-- A Message Block -->
-<%# messages() %>
-    
+
 <!-- The Inventory Items Display -->
 <%- grid %>
+
+<h2 class="heading-review">Customers Reviews</h2>
+<% if (reviewsList) { %>
+    <%- reviewsList %>
+<% } else { %>
+    <p class="review-messages">Be the first to write a review.</p>
+<% } %>
+
+<% if (locals.loggedin) { %>
+    <%- messages() %>
+    <h2 class="heading-review">Add Your Own Review</h2>
+    <% if (errors) { %>
+        <ul class="notice">
+        <% errors.array().filter(error => error. msg !== "Invalid value").forEach(error => { %>
+            <li>&#9888; <%= error.msg %></li>
+        <%}) %>
+        </ul>
+    <% } %>
+    <form action="/inv/add-review" method="post" class="login-form">
+        <label>
+            Screen Name:
+            <input type="text" value="<%= locals.accountData.account_firstname[0] %><%= locals.accountData.account_lastname %>" readonly>
+        </label>
+        <label for="review_text">
+            Review:
+            <textarea name="review_text" id="review_text" required minlength="5"><%= locals.review_text %></textarea>
+        </label>
+
+        <button type="submit">
+            Submit Review
+        </button>
+
+        <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+        <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+    </form>
+<% } else { %>
+    <p class="review-messages">You must be <a href="/account/login">login</a> to write a review</p>
+<% } %>

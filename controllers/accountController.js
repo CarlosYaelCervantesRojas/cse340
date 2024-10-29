@@ -34,10 +34,12 @@ async function buildRegisterView(req, res, next) {
 * *************************************** */
 async function buildManagementView(req, res, next) {
     let nav = await utilities.getNav()
+    let userReviews = await utilities.buildReviewsByAccountId(res.locals.accountData.account_id)
     res.render("account/management", {
         title: "Account Management",
         nav,
-        errors: null
+        errors: null,
+        userReviews
     })
 }
 
@@ -181,6 +183,7 @@ async function updateAccount(req, res) {
     )
 
     let nav = await utilities.getNav()
+    let userReviews = await utilities.buildReviewsByAccountId(res.locals.accountData.account_id)
 
     if (updateResult) {
         // Could be updated the authentication cookie,
@@ -208,6 +211,7 @@ async function updateAccount(req, res) {
             title: "Account Management",
             nav,
             errors: null,
+            userReviews
         })
     } else {
         req.flash("notice", "Sorry, something went wrong.")
@@ -215,6 +219,7 @@ async function updateAccount(req, res) {
             title: "Account Management",
             nav,
             errors: null,
+            userReviews
         })
     }
 }
@@ -224,6 +229,7 @@ async function updateAccount(req, res) {
  * ************************************ */
 async function updatePassword(req, res) {
     let nav = utilities.getNav()
+    let userReviews = await utilities.buildReviewsByAccountId(res.locals.accountData.account_id)
     const {
         account_password,
         account_id
@@ -237,6 +243,7 @@ async function updatePassword(req, res) {
           title: "Edit Account",
           nav,
           errors: null,
+          userReviews
         })
     }
 
@@ -248,6 +255,7 @@ async function updatePassword(req, res) {
             title: "Account Management",
             nav,
             errors: null,
+            userReviews
         })
     } else {
         req.flash("notice", "Sorry, something went wrong.")
@@ -255,6 +263,7 @@ async function updatePassword(req, res) {
             title: "Account Management",
             nav,
             errors: null,
+            userReviews
         })
     }
 }

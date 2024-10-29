@@ -26,7 +26,8 @@ h1,
 #manage-inv h2,
 #account-management h2,
 #account-management h3,
-#updade-password {
+#updade-password,
+.heading-review {
   font-family: var(--heading-font);
 }
 
@@ -54,7 +55,11 @@ h1,
 #manage-inv select,
 #manage-inv option,
 #inventoryDisplay tbody tr td,
-#account-management a {
+#account-management a,
+#review-list li,
+.review-messages,
+#my-reviews li,
+.no-reviews {
   font-family: var(--paragraph-font);
   font-weight: 700;
   font-size: 1rem;
@@ -81,7 +86,8 @@ h1,
 #manage-inv h2,
 #account-management h2,
 #account-management h3,
-#updade-password {
+#updade-password,
+.heading-review {
   font-weight: 100;
   margin-top: 1.5rem;
   font-size: 1.2rem;
@@ -209,7 +215,8 @@ h1 {
 }
 
 #home-cont article ul,
-#management-links {
+#management-links,
+.review-messages {
   padding-left: 1rem;
 }
 
@@ -244,7 +251,8 @@ h1 {
 /* Vehicles content */
 #inv-display,
 #messages ul,
-.notice {
+.notice,
+#review-list {
   list-style: none;
   padding: 0;
   text-align: center;
@@ -291,6 +299,19 @@ h1 {
 #item-cont article p:nth-child(even) {
   padding: .8rem .5rem;
   background-color: rgba(0, 0, 0, .1);
+}
+
+#review-list {
+  margin-left: 1rem;
+  text-align: start;
+}
+
+#review-list li {
+  margin-top: 1rem;
+}
+
+#review-list li div p {
+  margin: 0;
 }
 
 
@@ -404,7 +425,8 @@ input[type="text"]:focus:valid,
 }
 
 #manage-inv,
-#account-management {
+#account-management,
+.heading-review {
   padding: 1rem;
 }
 

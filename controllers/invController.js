@@ -28,10 +28,14 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const grid = await utilities.buildItemGrid(data)
   let nav = await utilities.getNav()
   const className = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
+  const reviewsList = await utilities.buildReviews(inventory_id)
   res.render("inventory/item", {
     title: className,
+    errors: null,
     nav,
-    grid
+    grid,
+    reviewsList,
+    inv_id: inventory_id
   })
 }
 
@@ -73,6 +77,38 @@ invCont.buildAddInventoryView = async function (req, res, next) {
     nav,
     classificationList,
     errors: null
+  })
+}
+
+/* ***************************
+ *  Deliver edit review view
+ * ************************** */
+invCont.buildUpdateReviewView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const reviewData = await invModel.getReviewByReviewId(req.params.review_id)
+  res.render("inventory/edit-review", {
+    title: `Edit ${reviewData.inv_year} ${reviewData.inv_model} ${reviewData.inv_make} Review`,
+    nav,
+    errors: null,
+    review_date: reviewData.review_date.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"}),
+    review_text: reviewData.review_text,
+    review_id: reviewData.review_id
+  })
+}
+
+/* ***************************
+ *  Deliver delete review view
+ * ************************** */
+invCont.buildDeleteReviewView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const reviewData = await invModel.getReviewByReviewId(req.params.review_id)
+  res.render("inventory/delete-review", {
+    title: `Delete ${reviewData.inv_year} ${reviewData.inv_model} ${reviewData.inv_make} Review`,
+    nav,
+    errors: null,
+    review_date: reviewData.review_date.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"}),
+    review_text: reviewData.review_text,
+    review_id: reviewData.review_id
   })
 }
 
@@ -160,6 +196,50 @@ invCont.addVehicle = async function(req, res, next) {
       errors: null
     })
   }
+}
+
+/* ****************************************
+*  Process new review
+* *************************************** */
+invCont.addReview = async function (req, res, next) {
+  const {
+    review_text,
+    account_id,
+    inv_id
+  } = req.body
+
+  const reviewResult = await invModel.addReview(review_text, account_id, inv_id)
+
+  const data = await invModel.getItemByInventoryId(inv_id)
+  const grid = await utilities.buildItemGrid(data)
+  const className = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
+  let nav = await utilities.getNav()
+  const reviewsList = await utilities.buildReviews(inv_id)
+
+  if (reviewResult) {
+    req.flash("notice", `Your review has been added.`)
+    res.status(201).render("inventory/item", {
+      title: className,
+      errors: null,
+      nav,
+      grid,
+      reviewsList,
+      inv_id
+    })
+    return
+  } else {
+    req.flash("notice", `Sorry, your review could not be processed.`)
+    res.status(501).render("inventory/item", {
+      title: className,
+      errors: null,
+      nav,
+      grid,
+      reviewsList,
+      inv_id
+    })
+    return
+}
+
 }
 
 /* ***************************
@@ -263,6 +343,40 @@ invCont.updateVehicle = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Update Review Data
+ * ************************** */
+invCont.updateReview = async function (req, res, next) {
+  const {
+    review_id,
+    review_text,
+  } = req.body
+
+  const updateResult = await invModel.updateReview(review_text, review_id)
+
+  let nav = await utilities.getNav()
+  let userReviews = await utilities.buildReviewsByAccountId(res.locals.accountData.account_id)
+
+  if (updateResult) {
+    req.flash("notice", "Your review has been updated.")
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+        userReviews
+    })
+  } else {
+    req.flash("notice", "Your review could not been updated.")
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+        userReviews
+    })
+  }
+
+}
+
 
 /* ***************************
  *  Deliver delete confirmation view
@@ -317,6 +431,39 @@ invCont.deleteVehicle = async function (req, res, next) {
     inv_price,
     })
   }
+}
+
+/* ***************************
+ *  Delete Review Data
+ * ************************** */
+invCont.deleteReview = async function (req, res, next) {
+  const {
+    review_id,
+  } = req.body
+
+  const deleteResult = await invModel.deleteReview(review_id)
+
+  let nav = await utilities.getNav()
+  let userReviews = await utilities.buildReviewsByAccountId(res.locals.accountData.account_id)
+
+  if (deleteResult) {
+    req.flash("notice", "Your review has been deleted.")
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+        userReviews
+    })
+  } else {
+    req.flash("notice", "Your review could not been deleted.")
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+        userReviews
+    })
+  }
+
 }
 
 

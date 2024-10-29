@@ -107,6 +107,49 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList
 }
 
+/* **************************************
+* Build the review list
+* ************************************ */
+Util.buildReviews = async function (inv_id) {
+  let data = await invModel.getReviewsByInventoryId(inv_id)
+  let reviewsList
+  if (data.length > 0) {
+    reviewsList =
+    '<ul id="review-list">'
+    data.forEach((row) => {
+    reviewsList += 
+    `<li>
+      <div>
+        <p>${row.account_firstname[0]}${row.account_lastname} wrote on ${row.review_date.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})}</p>
+        <p>&#9885; ${row.review_text}</p>
+      </div>
+    </li>`
+  })
+  reviewsList += "</ul>"
+  }
+  return reviewsList
+}
+
+/* **************************************
+* Build the reviews by account id
+* ************************************ */
+Util.buildReviewsByAccountId = async function (account_id) {
+  let data = await invModel.getReviewsByAccountId(account_id)
+  let userReviews
+  if (data.length > 0) {
+    userReviews =
+    '<ol id="my-reviews">'
+    data.forEach((row) => {
+      userReviews += 
+    `<li>
+        <p>Reviewed the ${row.inv_year} ${row.inv_make} ${row.inv_model} on ${row.review_date.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})} | <a href="/inv/edit-review/${row.review_id}">Edit</a> | <a href="/inv/delete-review/${row.review_id}">Delete</a></p>
+    </li>`
+  })
+  userReviews += "</ol>"
+  }
+  return userReviews
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
